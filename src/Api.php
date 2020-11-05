@@ -4,7 +4,13 @@ namespace Sharemat\Sdk;
 
 use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\StreamInterface;
-use Sharemat\Sdk\Resources\Equipment;
+use Sharemat\Sdk\Resources\Account\Organization;
+use Sharemat\Sdk\Resources\Account\Site;
+use Sharemat\Sdk\Resources\Account\Region;
+use Sharemat\Sdk\Resources\Fleet\Equipment;
+use Sharemat\Sdk\Resources\Fleet\ConstructionSite;
+use Sharemat\Sdk\Resources\Fleet\ConstructionSiteEquipment;
+use Sharemat\Sdk\Resources\Fleet\Intervention;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
 
@@ -123,8 +129,62 @@ class Api
     }
 
     /************************************************************************
-     ** Relations
+     ** Relations - Account
      ************************************************************************/
+
+    /**
+     * Return an instance of the Organization class.
+     *
+     * @return Organization
+     */
+    public function organization()
+    {
+        return new Organization($this->hostname, $this->accessToken);
+    }
+
+    /**
+     * Return an instance of the Region class.
+     *
+     * @return Region
+     */
+    public function region()
+    {
+        return new Region($this->hostname, $this->accessToken);
+    }
+
+    /**
+     * Return an instance of the Site class.
+     *
+     * @return Site
+     */
+    public function site()
+    {
+        return new Site($this->hostname, $this->accessToken);
+    }
+
+    /************************************************************************
+     ** Relations - Fleet
+     ************************************************************************/
+
+    /**
+     * Return an instance of the ConstructionSite class.
+     *
+     * @return ConstructionSite
+     */
+    public function constructionSite()
+    {
+        return new ConstructionSite($this->hostname, $this->accessToken);
+    }
+
+    /**
+     * Return an instance of the ConstructionSiteEquipment class.
+     *
+     * @return ConstructionSiteEquipment
+     */
+    public function constructionSiteEquipment()
+    {
+        return new ConstructionSiteEquipment($this->hostname, $this->accessToken);
+    }
 
     /**
      * Return an instance of the Equipment class.
@@ -134,5 +194,15 @@ class Api
     public function equipment()
     {
         return new Equipment($this->hostname, $this->accessToken);
+    }
+
+    /**
+     * Return an instance of the Intervention class.
+     *
+     * @return Intervention
+     */
+    public function intervention()
+    {
+        return new Intervention($this->hostname, $this->accessToken);
     }
 }
