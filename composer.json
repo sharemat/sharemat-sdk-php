@@ -32,6 +32,11 @@
       "ext-mbstring": "1"
     }
   },
+  "scripts": {
+    "phpunit": [
+      "php -d memory_limit=-1 vendor/bin/phpunit --order-by=defects"
+    ]
+  },
   "autoload": {
     "psr-4": {
       "Sharemat\\Sdk\\": "src/"

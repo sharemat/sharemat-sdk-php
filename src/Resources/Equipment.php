@@ -13,7 +13,7 @@ class Equipment extends Api
      */
     public function getEquipments()
     {
-        return self::getCollection('/equipments');
+        return self::getCollection('/equipment');
     }
     
     /**
@@ -24,6 +24,6 @@ class Equipment extends Api
      */
     public function getEquipment($id)
     {
-        return self::getResource('/equipments/' . $id);
+        return self::getResource('/equipment/' . $id);
     }
 }
