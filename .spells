@@ -1,5 +1,3 @@
-./vendor/bin/phpunit
-
 function phpunit() {
   ./vendor/bin/phpunit
 }

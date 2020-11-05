@@ -27,33 +27,11 @@ class ApiTest extends TestCase
     {
         $this->assertTrue($this->api->hasCats());
     }
-    
-    public function testCreateGreetings()
+
+    public function testGetEquipments()
     {
-        $test = [];
-        $response = $this->api->greetings()->createGreetings($test);
+        $response = $this->api->equipment()->getEquipments();
         
-        $this->assertEquals($response['@context'], '/contexts/Greeting');
-    }
-    
-    public function testGetCustomerToAffiliate()
-    {
-        $response = $this->api->customerToAffiliate()->getCustomerToAffiliates();
-        
-        $this->assertEquals($response['@context'], '/contexts/CustomerToAffiliate');
-    }
-    
-    public function testGetCustomerToAffiliateToAddresses()
-    {
-        $response = $this->api->customerToAffiliateToAddress()->getCustomerToAffiliateToAddresses();
-        
-        $this->assertEquals($response['@context'], '/contexts/CustomerToAffiliateToAddress');
-    }
-    
-    public function testGetCustomerToAffiliateToUsers()
-    {
-        $response = $this->api->customerToAffiliateToUser()->getCustomerToAffiliateToUsers();
-        
-        $this->assertEquals($response['@context'], '/contexts/CustomerToAffiliateToUser');
+        $this->assertEquals($response['@context'], '/contexts/Equipment');
     }
 }
