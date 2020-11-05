@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  php:
+    image: lephare/php:7.4
+    user: ${UID:-1000}:${GID:-1000}
+    working_dir: /var/www
+    volumes:
+      - ${COMPOSER_HOME:-~/.composer}:/.composer
+      - .:/var/www
+    environment:
+      COMPOSER_HOME: /.composer
