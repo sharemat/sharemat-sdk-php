@@ -11,18 +11,6 @@ Requirements
 Installation
 ------------
 
-Use the following custom repositories in your project's composer.json:
-~~~json
-{
-    "repositories": [
-        {"type": "composer", "url": "https://repo.packagist.com/lephare/"},
-        {"packagist.org": false}
-    ]
-}
-~~~
-
-Then, an authentification token is to be provided by Le Phare.
-
 Use the following Composer command to install the SDK.
 ~~~shell
  $ composer require sharemat/php-sdk
