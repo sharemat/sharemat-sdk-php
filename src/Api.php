@@ -3,6 +3,7 @@
 namespace Sharemat\Sdk;
 
 use GuzzleHttp\Psr7\Utils;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Sharemat\Sdk\Resources\Account\Organization;
 use Sharemat\Sdk\Resources\Account\Site;
@@ -11,6 +12,7 @@ use Sharemat\Sdk\Resources\Fleet\Equipment;
 use Sharemat\Sdk\Resources\Fleet\ConstructionSite;
 use Sharemat\Sdk\Resources\Fleet\ConstructionSiteEquipment;
 use Sharemat\Sdk\Resources\Fleet\Intervention;
+use Sharemat\Sdk\Exception\EndpointException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
 
@@ -53,6 +55,59 @@ class Api
      ************************************************************************/
 
     /**
+     * @param string     $method
+     * @param string     $path
+     * @param array|null $headers
+     * @param array|null $body
+     *
+     * @return ResponseInterface
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
+    protected function sendRequest(
+        string $method,
+        string $path,
+        array $headers = null,
+        array $body = null
+    ): ResponseInterface {
+        $request = $this->client->createRequest($method, $path);
+
+        if ($headers) {
+            foreach ($headers as $headerName => $headerValue) {
+                $request = $request->withHeader($headerName, $headerValue);
+            }
+        }
+
+        if ($body) {
+            $request = $request->withBody($this->createStream($body));
+        }
+
+        return $this->client->sendRequest($request);
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @param bool              $assoc
+     *
+     * @return array
+     * @throws EndpointException
+     */
+    private function decodeResponseBody(ResponseInterface $response, bool $assoc = true): array
+    {
+        $data = json_decode($response->getBody()->getContents(), $assoc);
+
+        if (!$data) {
+            return [
+                'error' => sprintf(
+                    "An error occured on distant api: \n %s",
+                    strtok((string)$response->getBody(), "\n")
+                )
+            ];
+        }
+
+        return $data;
+    }
+
+    /**
      * Get a collection result from the specified endpoint.
      *
      * @param string $path api endpoint
@@ -60,10 +115,7 @@ class Api
      */
     public function getCollection($path)
     {
-        $request = $this->client->createRequest('GET', $path);
-        $response = $this->client->sendRequest($request);
-
-        return json_decode($response->getBody()->getContents(), TRUE);
+        return $this->decodeResponseBody($this->sendRequest('GET', $path));
     }
 
     /**
@@ -74,10 +126,7 @@ class Api
      */
     public function getResource($path)
     {
-        $request = $this->client->createRequest('GET', $path);
-        $response = $this->client->sendRequest($request);
-
-        return json_decode($response->getBody()->getContents(), TRUE);
+        return $this->decodeResponseBody($this->sendRequest('GET', $path));
     }
 
     /**
@@ -89,12 +138,7 @@ class Api
      */
     public function createResource($path, $array)
     {
-        $request = $this->client->createRequest('POST', $path)
-                                ->withHeader('Content-Type', 'application/json')
-                                ->withBody($this->createStream($array));
-        $response = $this->client->sendRequest($request);
-
-        return json_decode($response->getBody()->getContents(), TRUE);
+        return $this->decodeResponseBody($this->sendRequest('POST', $path, ['Content-Type' => 'application/json'], $array));
     }
 
     /**
@@ -106,12 +150,7 @@ class Api
      */
     public function updateResource($path, $array)
     {
-        $request = $this->client->createRequest('PUT', $path)
-                                ->withHeader('Content-Type', 'application/json')
-                                ->withBody($this->createStream($array));
-        $response = $this->client->sendRequest($request);
-
-        return json_decode($response->getBody()->getContents(), TRUE);
+        return $this->decodeResponseBody($this->sendRequest('PUT', $path, ['Content-Type' => 'application/json'], $array));
     }
 
     /**
@@ -122,10 +161,7 @@ class Api
      */
     public function deleteResource($path)
     {
-        $request = $this->client->createRequest('DELETE', $path);
-        $response = $this->client->sendRequest($request);
-
-        return json_decode($response->getBody()->getContents(), TRUE);
+        return $this->decodeResponseBody($this->sendRequest('DELETE', $path));
     }
 
     /************************************************************************
