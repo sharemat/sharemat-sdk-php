@@ -39,6 +39,17 @@ class Equipment extends Api
     }
 
     /**
+     * Update or Create multiple Equipments.
+     *
+     * @param array $array
+     * @return array
+     */
+    public function upsertEquipments($array)
+    {
+        return self::createResource('/equipment/upsert', $array);
+    }
+
+    /**
      * Update a single Equipment by given id.
      *
      * @param int $id
