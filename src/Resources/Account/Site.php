@@ -39,6 +39,17 @@ class Site extends Api
     }
 
     /**
+     * Upsert a Site or a Region.
+     *
+     * @param array $array
+     * @return array
+     */
+    public function upsertRegionSite($array)
+    {
+        return self::createResource('/sites/upsert', $array);
+    }
+
+    /**
      * Update a single Site by given id.
      *
      * @param int $id
