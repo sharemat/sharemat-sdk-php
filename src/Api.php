@@ -9,6 +9,7 @@ use Sharemat\Sdk\Resources\Account\Organization;
 use Sharemat\Sdk\Resources\Account\Site;
 use Sharemat\Sdk\Resources\Account\Region;
 use Sharemat\Sdk\Resources\Fleet\Equipment;
+use Sharemat\Sdk\Resources\Fleet\EquipmentConfiguration;
 use Sharemat\Sdk\Resources\Fleet\ConstructionSite;
 use Sharemat\Sdk\Resources\Fleet\ConstructionSiteEquipment;
 use Sharemat\Sdk\Resources\Fleet\Intervention;
@@ -230,6 +231,16 @@ class Api
     public function equipment()
     {
         return new Equipment($this->hostname, $this->accessToken);
+    }
+
+    /**
+     * Return an instance of the EquipmentConfiguration class.
+     *
+     * @return EquipmentConfiguration
+     */
+    public function equipmentConfiguration()
+    {
+        return new EquipmentConfiguration($this->hostname, $this->accessToken);
     }
 
     /**
