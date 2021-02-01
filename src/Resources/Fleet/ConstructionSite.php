@@ -9,13 +9,14 @@ class ConstructionSite extends Api
     /**
      * Get a collection of ConstructionSite.
      *
+     * @param array $filters
      * @return array
      */
-    public function getConstructionSites()
+    public function getConstructionSites($filters=[])
     {
         return self::getCollection('/construction_sites');
     }
-    
+
     /**
      * Get a single ConstructionSite by given id.
      *

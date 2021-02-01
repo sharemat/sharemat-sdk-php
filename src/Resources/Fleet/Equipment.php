@@ -9,15 +9,16 @@ class Equipment extends Api
     /**
      * Get a collection of Equipment.
      *
+     * @param array $filters
      * @return array
      */
-    public function getEquipments()
+    public function getEquipments($filters=[])
     {
-        return self::getCollection('/equipment');
+        return self::getCollection('/equipment' . self::filtersToQueryString($filters));
     }
-    
+
     /**
-     * Get a single Equipment by given id.
+     * Get a single Equipment by given id.filtersToQueryString($filters):
      *
      * @param int $id
      * @return array

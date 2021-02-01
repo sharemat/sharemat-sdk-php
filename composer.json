@@ -1,7 +1,7 @@
 {
   "name": "sharemat/php-sdk",
   "description": "PHP SDK for Sharemat REST API",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "package",
   "license": "mit",
   "authors": [
@@ -40,6 +40,11 @@
   "autoload": {
     "psr-4": {
       "Sharemat\\Sdk\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+        "Sharemat\\Sdk\\Tests\\": "tests/"
     }
   }
 }

@@ -9,13 +9,14 @@ class Site extends Api
     /**
      * Get a collection of Site.
      *
+     * @param array $filters
      * @return array
      */
-    public function getSites()
+    public function getSites($filters=[])
     {
-        return self::getCollection('/sites');
+        return self::getCollection('/sites' . self::filtersToQueryString($filters));
     }
-    
+
     /**
      * Get a single Site by given id.
      *

@@ -9,13 +9,14 @@ class Organization extends Api
     /**
      * Get a collection of Organization.
      *
+     * @param array $filters
      * @return array
      */
-    public function getOrganizations()
+    public function getOrganizations($filters=[])
     {
-        return self::getCollection('/organizations');
+        return self::getCollection('/organizations' . self::filtersToQueryString($filters));
     }
-    
+
     /**
      * Get a single Organization by given id.
      *

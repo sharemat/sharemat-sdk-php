@@ -9,13 +9,14 @@ class ConstructionSiteEquipment extends Api
     /**
      * Get a collection of ConstructionSiteEquipment.
      *
+     * @param array $filters
      * @return array
      */
-    public function getConstructionSiteEquipments()
+    public function getConstructionSiteEquipments($filters=[])
     {
-        return self::getCollection('/construction_site_equipments');
+        return self::getCollection('/construction_site_equipments' . self::filtersToQueryString($filters));
     }
-    
+
     /**
      * Get a single ConstructionSiteEquipment by given id.
      *

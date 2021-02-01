@@ -56,6 +56,20 @@ class Api
      ************************************************************************/
 
     /**
+     * @param array $filters
+     */
+    public function filtersToQueryString($filters): string
+    {
+        $queryString = '';
+        $sep = '?';
+        foreach($filters as $key => $value) {
+            $queryString .= $sep . $key .'=' . $value;
+            $sep = '&';
+        }
+        return $queryString;
+    }
+
+    /**
      * @param string     $method
      * @param string     $path
      * @param array|null $headers

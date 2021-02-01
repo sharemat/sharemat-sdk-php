@@ -9,13 +9,14 @@ class Intervention extends Api
     /**
      * Get a collection of Intervention.
      *
+     * @param array $filters
      * @return array
      */
-    public function getInterventions()
+    public function getInterventions($filters=[])
     {
-        return self::getCollection('/interventions');
+        return self::getCollection('/interventions' . self::filtersToQueryString($filters));
     }
-    
+
     /**
      * Get a single Intervention by given id.
      *

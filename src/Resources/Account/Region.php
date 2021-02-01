@@ -9,13 +9,14 @@ class Region extends Api
     /**
      * Get a collection of Region.
      *
+     * @param array $filters
      * @return array
      */
-    public function getRegions()
+    public function getRegions($filters=[])
     {
-        return self::getCollection('/regions');
+        return self::getCollection('/regions' . self::filtersToQueryString($filters));
     }
-    
+
     /**
      * Get a single Region by given id.
      *
