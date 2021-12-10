@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  php:
+  sdk:
     image: lephare/php:7.4
     user: ${UID:-1000}:${GID:-1000}
     working_dir: /var/www
@@ -10,3 +10,11 @@ services:
       - .:/var/www
     environment:
       COMPOSER_HOME: /.composer
+    # Permet d'accéder à fleet-platform en http
+    networks:
+      - default
+      - fleet-platform
+
+networks:
+  fleet-platform:
+    external: { name: sharemat_default }
