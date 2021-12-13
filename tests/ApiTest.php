@@ -38,6 +38,20 @@ class ApiTest extends TestCase
         $this->assertEquals($response['@context'], '/contexts/Equipment');
     }
 
+    public function testGetEquipmentConfigurations()
+    {
+        $response = $this->api->equipment()->getEquipmentConfigurations();
+
+        $this->assertEquals($response['@context'], '/contexts/Equipment');
+    }
+
+    public function testGetEquipmentFiles()
+    {
+        $response = $this->api->equipment()->getEquipmentFiles();
+
+        $this->assertEquals($response['@context'], '/contexts/Equipment');
+    }
+
     public function testFiltersToQueryString()
     {
         $queryString = ReflectionHelper::callMethod(

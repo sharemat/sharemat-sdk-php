@@ -18,6 +18,28 @@ class Equipment extends Api
     }
 
     /**
+     * Get a collection of Equipment with EquipmentConfiguration.
+     *
+     * @param array $filters
+     * @return array
+     */
+    public function getEquipmentConfigurations($filters=[])
+    {
+        return self::getCollection('/equipment_configurations_by_serial' . self::filtersToQueryString($filters));
+    }
+
+    /**
+     * Get a collection of Equipment with EquipmentFile.
+     *
+     * @param array $filters
+     * @return array
+     */
+    public function getEquipmentFiles($filters=[])
+    {
+        return self::getCollection('/equipment_files_by_serial' . self::filtersToQueryString($filters));
+    }
+
+    /**
      * Get a single Equipment by given id.filtersToQueryString($filters):
      *
      * @param int $id
