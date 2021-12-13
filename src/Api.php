@@ -63,8 +63,16 @@ class Api
         $queryString = '';
         $sep = '?';
         foreach($filters as $key => $value) {
-            $queryString .= $sep . $key .'=' . $value;
-            $sep = '&';
+            if (is_array($value)) {
+                foreach ($value as $v) 
+                {
+                    $queryString .= $sep . $key .'[]=' . $v;
+                    $sep = '&';
+                }
+            } else {
+                $queryString .= $sep . $key .'=' . $value;
+                $sep = '&';
+            }
         }
         return $queryString;
     }
