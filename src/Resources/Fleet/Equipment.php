@@ -25,7 +25,7 @@ class Equipment extends Api
      */
     public function getEquipmentConfigurations($filters=[])
     {
-        return self::getCollectionWithBody('/equipment_configurations_by_serial', $filters);
+        return self::getCollection('/equipment_configurations_by_serial' . self::filtersToQueryString($filters));
     }
 
     /**
@@ -36,7 +36,7 @@ class Equipment extends Api
      */
     public function getEquipmentFiles($filters=[])
     {
-        return self::getCollectionWithBody('/equipment_files_by_serial', $filters);
+        return self::getCollection('/equipment_files_by_serial' . self::filtersToQueryString($filters));
     }
 
     /**

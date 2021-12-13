@@ -142,18 +142,6 @@ class Api
     }
 
     /**
-     * Send a post request to create a resource on the specified collection.
-     *
-     * @param string $path api endpoint
-     * @param mixed $array array
-     * @return mixed
-     */
-    public function getCollectionWithBody($path, $array)
-    {
-        return $this->decodeResponseBody($this->sendRequest('GET', $path, ['Content-Type' => 'application/json'], $array));
-    }
-
-    /**
      * Get a resource entity from the specified endpoint.
      *
      * @param string $path api endpoint
