@@ -73,6 +73,17 @@ class Equipment extends Api
     }
 
     /**
+     * Update or Create Contract (sharing).
+     *
+     * @param array $array
+     * @return array
+     */
+    public function upsertContracts($array)
+    {
+        return self::createResource('/equipment_sharing/upsert', $array);
+    }
+
+    /**
      * Update or Create multiple Equipment files.
      *
      * @param array $array
