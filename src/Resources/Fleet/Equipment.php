@@ -84,6 +84,17 @@ class Equipment extends Api
     }
 
     /**
+     * Stop Contracts (sharing).
+     *
+     * @param array $array
+     * @return array
+     */
+    public function stopContracts($array)
+    {
+        return self::createResource('/equipment_sharing/stop', $array);
+    }
+
+    /**
      * Update or Create multiple Equipment files.
      *
      * @param array $array
