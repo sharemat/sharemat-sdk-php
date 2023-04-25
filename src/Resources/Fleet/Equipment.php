@@ -29,6 +29,17 @@ class Equipment extends Api
     }
 
     /**
+     * Get a collection of Equipment with MaintenanceConfiguration.
+     *
+     * @param array $filters
+     * @return array
+     */
+    public function getMaintenanceConfigurations($filters=[])
+    {
+        return self::getCollection('/maintenance_configurations_by_ref' . self::filtersToQueryString($filters));
+    }
+
+    /**
      * Get a collection of Equipment with EquipmentFile.
      *
      * @param array $filters

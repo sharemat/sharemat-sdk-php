@@ -45,6 +45,13 @@ class ApiTest extends TestCase
         $this->assertEquals($response['@context'], '/contexts/Equipment');
     }
 
+    public function testGetMaintenanceConfigurations()
+    {
+        $response = $this->api->equipment()->getMaintenanceConfigurations();
+
+        $this->assertEquals($response['@context'], '/contexts/Equipment');
+    }
+
     public function testGetEquipmentFiles()
     {
         $response = $this->api->equipment()->getEquipmentFiles();
